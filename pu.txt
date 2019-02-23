@@ -1,0 +1,53 @@
+python <<EOF
+import json
+import psutil as pu
+import datetime
+
+#get cpuInfo
+#print('====================cpuInfo====================')
+cpuInfo = {}
+cpuInfo["logicalCount"] = pu.cpu_count()
+cpuInfo["physicalCount"] = pu.cpu_count(logical=False) 
+cpuInfo["userFreetime"] = pu.cpu_times().user
+cpuInfo["sysFreetime"] = pu.cpu_times().system
+cpuInfo["allPercent"] = pu.cpu_percent(0)
+cpuData = json.dumps(cpuInfo)
+print(cpuData)
+
+#get memInfo 
+#print('====================memInfo====================')
+memInfo = {}
+mem = pu.virtual_memory()
+memInfo["memTotal"] = mem.total/1024**2
+memInfo["memAvailable"] = mem.available/1024**2
+memInfo["memPercent"] = mem.percent
+memInfo["memUsed"] = mem.used/1024**2
+memInfo["memFree"] = mem.free/1024**2
+memData = json.dumps(memInfo)
+print(memData)
+
+#get diskInfo
+#print('====================diskInfo====================')
+diskInfo = {}
+diskusage = pu.disk_usage('/') #bug1
+diskInfo["diskTotal"] = diskusage.total/1024**3
+diskInfo["diskUsed"] = diskusage.used/1024**3
+diskInfo["diskFree"] = diskusage.free/1024**3
+diskInfo["diskPercent"] = diskusage.percent
+diskData = json.dumps(diskInfo)
+print(diskData)
+
+#get netInfo
+netInfo = {}
+netInfo["device"] = pu.net_io_counters(pernic=True).keys()
+netInfo["addrs"] = pu.net_if_addrs()["ens33"][0][1]
+netData = json.dumps(netInfo)
+print(netData)
+
+#get boot_time
+boot_timeInfo = {}
+boot_timeInfo["boot_time"] = datetime.datetime.fromtimestamp(pu.boot_time()).strftime("%Y-%m-%d %H:%M:%S")
+boot_timeData = json.dumps(boot_timeInfo)
+print(boot_timeData)
+
+EOF
