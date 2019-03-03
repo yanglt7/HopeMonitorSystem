@@ -1,6 +1,6 @@
 import pymysql
 
-conn = pymysql.connect("localhost", "monitor", "*hope8848", "monitordb")
+conn = pymysql.connect("localhost", "monitor", "passwd", "monitordb")
 print("Opened database successfully")
 
 cur = conn.cursor()
