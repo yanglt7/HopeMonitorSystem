@@ -14,7 +14,7 @@ cmd = cmd_file.read()
 #连接远程主机
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-client.connect("192.168.2.188", 23333,'root','ylt661810')
+client.connect("192.168.2.188", 23333,'root','passwd')
 #执行命令
 stdin, stdout, stderr = client.exec_command(cmd)
 #读取信息
@@ -69,8 +69,8 @@ class Monitor():
         nickname = 'hopeMonitorSystem'
 
         #sendInfo
-        msg_from = "1622320046@qq.com"
-        passwd = "iisxqbblccdcdjij"
+        msg_from = "yanglt7@qq.com"
+        passwd = "xxx"
         subject = 'Auto alarm'
 
         #receiveInfo
