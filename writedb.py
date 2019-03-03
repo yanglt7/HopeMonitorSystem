@@ -12,7 +12,7 @@ while True:
     cmd_file = open(cmd_filepath,"r")
     cmd = cmd_file.read()
     #监控主机信息列表
-    host_list = ({'ip': '192.168.2.188', 'port': 23333, 'username': 'root', 'password': 'ylt661810'},)
+    host_list = ({'ip': '192.168.2.188', 'port': 23333, 'username': 'root', 'password': 'passwd'},)
     #连接远程主机
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -27,7 +27,7 @@ while True:
     stdin, stdout, stderr = client.exec_command(cmd)
 
     # 连接数据库
-    conn = pymysql.connect("localhost", "monitor", "*hope8848", "monitordb")
+    conn = pymysql.connect("localhost", "monitor", "passwd", "monitordb")
     print("Opened database successfully")
 
     cur = conn.cursor()
