@@ -5,8 +5,7 @@ urls = (
     '/', 'index',
 )
 app = web.application(urls, globals())
-db = web.database(dbn='mysql', user='monitor', pw='*hope8848', db='monitordb', port=3306)
-#db2 = web.database(dbn='mysql', user='monitor', pw='*hope8848', db='monitordb2', port=3306)
+db = web.database(dbn='mysql', user='monitor', pw='passwd', db='monitordb', port=3306)
 web.config.debug = False
 
 class index:
